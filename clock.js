@@ -19,6 +19,33 @@ function drawBackground () {
     // 绘制路径
     ctx.stroke();
     ctx.closePath();
+    
+    ctx.font = '14px Arial';
+    // 垂直居中
+    ctx.textAlign = 'center';
+    // 水平居中
+    ctx.textBaseline = 'middle';
+
+    let hourNumbers = [3,4,5,6,7,8,9,10,11,12,1,2];
+    hourNumbers.forEach((number, i) =>{
+        /**
+         * 弧度算法讲解：
+         * 一个圆的总弧度是：2π（2 * Math.PI）
+         * 12个数字，每个数字的弧度是：2π/12 (2 * Math.PI / 12)
+         * 每个数字所对应的弧度就是：2 * Math.PI / 12 * i
+         * 
+         * 数字坐标算法讲解：
+         *      三角函数 sin (直角三角形30度角 对边/斜边)
+         *      三角函数 cos (直角三角形30度角 对边/邻边)
+         *      数字x轴坐标其实就是求 邻边 的长度：cos * 对边 (Math.cos(rad) * r)
+         *      数字y轴坐标其实就是求 对边 的长度：sin * 斜边 (Math.sin(rad) * r)
+         */
+        let rad = 2 * Math.PI / 12 * i;
+        let x = Math.cos(rad) * (r - 20);
+        let y = Math.sin(rad) * (r - 20);
+
+        ctx.fillText(number, x, y);
+    });
 }
 
 drawBackground();
