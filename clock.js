@@ -13,14 +13,12 @@ function drawBackground () {
 
     ctx.beginPath();
     ctx.lineWidth = 10;
-    console.log()
     // 画圆
     ctx.arc(0, 0, r-ctx.lineWidth/2, 0, 2 * Math.PI, false);
     // 绘制路径
     ctx.stroke();
     ctx.closePath();
     
-    ctx.font = '14px Arial';
     // 垂直居中
     ctx.textAlign = 'center';
     // 水平居中
@@ -41,10 +39,33 @@ function drawBackground () {
          *      数字y轴坐标其实就是求 对边 的长度：sin * 斜边 (Math.sin(rad) * r)
          */
         let rad = 2 * Math.PI / 12 * i;
-        let x = Math.cos(rad) * (r - 20);
-        let y = Math.sin(rad) * (r - 20);
-
+        let x = Math.cos(rad) * (r - 40);
+        let y = Math.sin(rad) * (r - 40);
+        if (i % 3 === 0) {
+            ctx.fillStyle = 'red'
+            ctx.font = '22px Arial';
+        } else {
+            ctx.font = '18px Arial';
+            ctx.fillStyle = '#000'
+        }
         ctx.fillText(number, x, y);
+
+        // 绘制秒数点
+        for(let i=0; i<60; i++) {
+            let rad = 2 * Math.PI / 60 *i;
+            let x = Math.cos(rad) * (r - 20);
+            let y = Math.sin(rad) * (r - 20);
+            ctx.beginPath();
+            if (i % 5 === 0) {
+                ctx.fillStyle = '#000'
+                ctx.arc(x, y, 2, 0, 2 * Math.PI, false);
+            } else {
+                ctx.fillStyle = '#ccc'
+                ctx.arc(x, y, 2, 0, 2 * Math.PI, false);
+            }
+            ctx.fill();
+            ctx.closePath();
+        }
     });
 }
 
